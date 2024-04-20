@@ -51,6 +51,10 @@ describe('TaskController', () => {
 
                 expect(response.status).toBe(200);
 
+                created.tasks.forEach((task) => {
+                    console.log('task id', task.id);
+                });
+
                 const haveAllTasksBeenReturned = response.body.every((task) =>
                     created.tasks.some(
                         (createdTask) => createdTask.id === task.id,
