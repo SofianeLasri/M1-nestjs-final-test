@@ -1,7 +1,5 @@
 version: '3.8'
 
-name: 'mongodb_nestjs-final-test'
-
 services:
   mongodb:
     image: mongo:latest
