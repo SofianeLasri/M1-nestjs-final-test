@@ -28,7 +28,6 @@ export class TaskController {
             !MongooseTypes.ObjectId.isValid(userId) ||
             isNaN(priority)
         ) {
-            // 400 Bad Request
             throw new BadRequestException('All fields are required');
         }
 
@@ -38,14 +37,12 @@ export class TaskController {
     @Get('/user/:userId')
     async getUserTasks(@Param('userId') userId: string): Promise<Task[]> {
         if (!userId || !MongooseTypes.ObjectId.isValid(userId)) {
-            // 400 Bad Request
             throw new BadRequestException('A valid userId is required');
         }
 
         const tasks = await this.taskService.getUserTasks(userId);
 
         if (!tasks) {
-            // 404 Not Found
             throw new HttpException('Tasks not found', HttpStatus.NOT_FOUND);
         }
 

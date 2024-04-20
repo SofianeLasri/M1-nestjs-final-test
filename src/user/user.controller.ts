@@ -18,7 +18,6 @@ export class UserController {
     async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!createUserDto.email || !emailRegex.test(createUserDto.email)) {
-            // 400 Bad Request
             throw new BadRequestException('A valid email is required');
         }
 
@@ -26,7 +25,6 @@ export class UserController {
             await this.userService.getUser(createUserDto.email);
 
         if (isUserAlreadyExists) {
-            // 409 Conflict
             throw new HttpException('User already exists', HttpStatus.CONFLICT);
         }
 
